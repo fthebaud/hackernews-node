@@ -1,0 +1,17 @@
+
+"""
+It exists 3 special root types: Query, Mutation, Subscription
+These root types contain Root fields that can be queried
+Root fields defined the available API operations 
+"""
+
+type Query {
+    info: String!
+    feed: [Link!]!
+}
+
+type Link {
+    id: ID!
+    description: String!
+    url: String!
+}
