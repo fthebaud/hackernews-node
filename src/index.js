@@ -8,11 +8,28 @@ let links = [{
   }]
 
 // Resolver object (= implementation of the schema, where/how to get the data)
+// Each resolver function has four arguments: 
+//      1 - parent: result of the previous resolver execution level
+//      2 - args: arguments for the operation
+//      3 - :
+//      4 - :
 const resolvers = {
     Query: {
         info: () => 'This is the API of hackernews clone',
         feed: () => links,
     },
+
+    Mutation: {
+        create: (parent, args) => {
+            const link = {
+                id: links.length + 1,
+                url: args.url,
+                description: args.description,
+            }
+            links.push(link);
+            return link;
+        }
+    }
 }
 
 // Instanciate the graphQL server with schema and resolver
