@@ -6,10 +6,14 @@ Root fields defined the available API operations
 
 type Query {
     info: String!
+    """ Fetch all links """
     feed: [Link!]!
+    """ Fetch one link """
+    link(id: ID!): Link
 }
 
 type Mutation {
+    """ Create a link """
     create(url: String!, description: String!): Link!
 }
 
