@@ -13,11 +13,6 @@ const resolvers = {
         info: () => 'This is the API of hackernews clone',
         feed: () => links,
     },
-    Link: {
-        id: (parent) => parent.id,
-        description: (parent) => parent.description,
-        url: (parent) => parent.url,
-    }
 }
 
 // Instanciate the graphQL server with schema and resolver
