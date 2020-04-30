@@ -2,7 +2,7 @@ const { GraphQLServer } = require('graphql-yoga')
 
 // data
 let links = [{
-    id: 'link-0',
+    id: '0',
     url: 'www.howtographql.com',
     description: 'Fullstack tutorial for GraphQL'
   }]
@@ -21,14 +21,32 @@ const resolvers = {
     },
 
     Mutation: {
-        create: (parent, args) => {
+        createLink: (parent, args) => {
             const link = {
-                id: links.length + 1,
+                id: links.length,
                 url: args.url,
                 description: args.description,
             }
             links.push(link);
             return link;
+        },
+        updateLink: (parent, args) => {
+            const {id, url, description} = args;
+            if (url) {
+                links[id].url = url;
+            }
+            if (description) {
+                links[id].description = description;
+            }
+            return links[id];
+        },
+        deleteLink: (parents, args) => {
+            const {id} = args;
+            if (links[id]) {
+                links.splice(id, 1);
+                return id;
+            }
+            return null;
         }
     }
 }
